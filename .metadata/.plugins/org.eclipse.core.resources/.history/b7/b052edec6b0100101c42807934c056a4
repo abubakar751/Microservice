@@ -1,0 +1,67 @@
+package com.user.services.controller;
+
+import com.user.services.entity.User;
+import com.user.services.service.UserService;
+import com.user.services.exception.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.ResourceAccessException;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/users") // Base URL for all the endpoints in this controller
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    
+    @PostMapping
+    public ResponseEntity<User> saveUser(@RequestBody User user) {
+        User savedUser = userService.saveData(user);
+        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);  // Return 201 status
+    }
+
+   
+    @GetMapping("/{userId}")
+    public ResponseEntity<User> getUserById(@PathVariable String userId) {
+        try {
+            User user = userService.getDataById(userId);
+            return new ResponseEntity<>(user, HttpStatus.OK);  // Return 200 status
+        } catch (ResourceAccessException ex) {
+            throw new ResourceNotFoundException("User not found with id: " + userId);
+        }
+    }
+
+    // Endpoint to get all users
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userService.getAllData();
+        return new ResponseEntity<>(users, HttpStatus.OK);  // Return 200 status
+    }
+
+    // Endpoint to update user data
+    @PutMapping("/{userId}")
+    public ResponseEntity<User> updateUser(@PathVariable String userId, @RequestBody User user) {
+        try {
+            User updatedUser = userService.updateData(userId, user);
+            return new ResponseEntity<>(updatedUser, HttpStatus.OK);  // Return 200 status
+        } catch (ResourceAccessException ex) {
+            throw new ResourceNotFoundException("User not found with id: " + userId);
+        }
+    }
+
+    // Endpoint to delete user by ID
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<Void> deleteUser(@PathVariable String userId) {
+        try {
+            userService.deleteData(userId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);  // Return 204 status
+        } catch (ResourceAccessException ex) {
+            throw new ResourceNotFoundException("User not found with id: " + userId);
+        }
+    }
+}

@@ -1,0 +1,51 @@
+package com.rating.controller;
+
+import com.rating.entity.Rating;
+import com.rating.service.RatingService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/ratings")
+public class RatingController {
+
+    @Autowired
+    private RatingService ratingService;
+
+    // Endpoint to get all ratings
+    @GetMapping
+    public List<Rating> getAllRatings() {
+        return ratingService.getAllRatings();
+    }
+
+    // Endpoint to get a rating by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Rating> getRatingById(@PathVariable String id) {
+        Rating rating = ratingService.getRatingById(id);
+        return new ResponseEntity<>(rating, HttpStatus.OK);
+    }
+
+    // Endpoint to create a new rating
+    @PostMapping
+    public ResponseEntity<Rating> createRating(@RequestBody Rating rating) {
+        Rating savedRating = ratingService.saveRating(rating);
+        return new ResponseEntity<>(savedRating, HttpStatus.CREATED);
+    }
+
+    // Endpoint to update an existing rating
+    @PutMapping("/{id}")
+    public ResponseEntity<Rating> updateRating(@PathVariable String id, @RequestBody Rating rating) {
+        Rating updatedRating = ratingService.updateRating(id, rating);
+        return new ResponseEntity<>(updatedRating, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteRating(@PathVariable String id) {
+        ratingService.deleteRating(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+}

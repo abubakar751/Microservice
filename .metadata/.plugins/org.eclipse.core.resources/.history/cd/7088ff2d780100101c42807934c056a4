@@ -1,0 +1,10 @@
+package com.user.services.entity;
+
+public class Rating {
+	private String ratingId;
+	private String userId;
+	private String hotelId;
+	private String rating ;
+	private String feedback;
+
+}

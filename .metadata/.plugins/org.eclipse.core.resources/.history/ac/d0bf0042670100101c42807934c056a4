@@ -1,0 +1,46 @@
+package com.user.services.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.user.services.entity.User;
+import com.user.services.exception.ResourceNotFoundException;
+import com.user.services.repository.UserRepository;
+@Service
+public class UserService implements IUserService {
+	private UserRepository repository;
+
+
+	@Override
+	public User saveData(User user) {
+		
+		return repository.save(user);
+	}
+
+	@Override
+	public Optional<User> getDataById(String userId) {
+		
+		return repository.findById(userId).orElseThrow(-> ResourceNotFoundException (""));
+	}
+
+	@Override
+	public List<User> getAllData() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User updateData(String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteData() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
