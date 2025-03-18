@@ -1,11 +1,14 @@
 package com.user.services.entity;
 
+import java.util.List;
+
 public class Rating {
 	private String ratingId;
 	private String userId;
 	private String hotelId;
 	private String rating ;
 	private String feedback;
+	private List<Hotel> hotel;
 	public String getRatingId() {
 		return ratingId;
 	}
