@@ -1,6 +1,6 @@
 package com.user.services.service;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +10,9 @@ import org.springframework.web.client.RestTemplate;
 
 import com.user.services.entity.Rating;
 import com.user.services.entity.User;
+import com.user.services.entity.UserHotel;
 import com.user.services.exception.ResourceNotFoundException;
 import com.user.services.repository.UserRepository;
-
-import ch.qos.logback.classic.Logger;
 @Service
 public class UserService implements IUserService {
 	@Autowired
@@ -25,22 +24,26 @@ public class UserService implements IUserService {
 	public User saveData(User user) {
 		return repository.save(user);
 	}
+	@Override
+	public User getDataById(String userId) {
+	    User user = repository.findById(userId)
+	            .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userId));
 
-	 @Override
-	    public User getDataById(String userId) {
-	        User user = repository.findById(userId)
-	                .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userId));
-
-	        ArrayList<Rating> ratings = restTemplate.getForObject("http://localhost:9097/ratings/hotel/"+ user.getUserId(), ArrayList.class);
-
-	        if (ratings != null) {
-	            user.setRating(ratings);
-	        } else {
-	            user.setRating(new ArrayList<>());
-	        }
-
-	        return user;
+	    Rating[] ratings = restTemplate.getForObject("http://RATINGSERVICE/ratings/hotel/" + user.getUserId(), Rating[].class);
+	    
+	    if (ratings != null && ratings.length > 0) {
+	        Rating rating = ratings[0];  
+	        UserHotel hotel = restTemplate.getForObject("http://HOTELSERVICE/hotels/" + rating.getHotelId(), UserHotel.class);
+	        
+	        
+	        user.setHotels(Collections.singletonList(hotel));
+	        user.setRating(Collections.singletonList(rating));
 	    }
+
+	    return user;
+	}
+
+
 
 	@Override
 	public List<User> getAllData() {// TODO Auto-generated method stub

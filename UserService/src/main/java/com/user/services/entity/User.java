@@ -2,6 +2,7 @@ package com.user.services.entity;
 
 import java.util.List;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Transient;
@@ -15,6 +16,14 @@ public class User {
 	private String about;
 	@Transient
 	private List<Rating> rating;
+	@Transient
+	private List<UserHotel> hotels;
+	public List<UserHotel> getHotels() {
+		return hotels;
+	}
+	public void setHotels(List<UserHotel> hotels) {
+		this.hotels = hotels;
+	}
 	public String getUserId() {
 		return userId;
 	}
@@ -41,10 +50,20 @@ public class User {
 	}
 	
 	
+	
+	public User(String userId, String name, String email, String about, List<Rating> rating, List<UserHotel> hotels) {
+		super();
+		this.userId = userId;
+		this.name = name;
+		this.email = email;
+		this.about = about;
+		this.rating = rating;
+		this.hotels = hotels;
+	}
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", name=" + name + ", email=" + email + ", about=" + about + ", rating="
-				+ rating + "]";
+				+ rating + ", hotels=" + hotels + "]";
 	}
 	public User() {
 		super();
@@ -56,14 +75,7 @@ public class User {
 	public void setRating(List<Rating> rating) {
 		this.rating = rating;
 	}
-	public User(String userId, String name, String email, String about, List<Rating> rating) {
-		super();
-		this.userId = userId;
-		this.name = name;
-		this.email = email;
-		this.about = about;
-		this.rating = rating;
-	}
+
 	
 	
 

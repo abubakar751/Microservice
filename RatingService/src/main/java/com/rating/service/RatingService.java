@@ -1,6 +1,7 @@
 package com.rating.service;
 
 import com.rating.entity.Rating;
+
 import com.rating.repository.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

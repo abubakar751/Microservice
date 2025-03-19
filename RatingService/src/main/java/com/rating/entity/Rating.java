@@ -2,7 +2,8 @@ package com.rating.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-
+import lombok.Data;
+@Data
 @Entity
 public class Rating {
 	@Id
@@ -40,11 +41,6 @@ public class Rating {
 	}
 	public void setFeedback(String feedback) {
 		this.feedback = feedback;
-	}
-	@Override
-	public String toString() {
-		return "Rating [ratingId=" + ratingId + ", userId=" + userId + ", hotelId=" + hotelId + ", rating=" + rating
-				+ ", feedback=" + feedback + "]";
 	}
 	public Rating(String ratingId, String userId, String hotelId, String rating, String feedback) {
 		super();

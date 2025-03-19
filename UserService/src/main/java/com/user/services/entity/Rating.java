@@ -7,8 +7,9 @@ public class Rating {
 	private String userId;
 	private String hotelId;
 	private String rating ;
+	
 	private String feedback;
-	private List<Hotel> hotel;
+	
 	public String getRatingId() {
 		return ratingId;
 	}
