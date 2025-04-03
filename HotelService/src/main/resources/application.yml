@@ -16,10 +16,9 @@ server:
  
 eureka:
   instance:
-    ip-address: :true
+    # Set a valid IP address or leave this section out for local development
+    ip-address: 127.0.0.1  # Or omit this if not needed
   client:
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
-  
-  
