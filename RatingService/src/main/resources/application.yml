@@ -5,7 +5,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/microservice
     username: root
-    password: abubakar
+    password: root
   jpa:
     hibernate:
       ddl-auto: update
