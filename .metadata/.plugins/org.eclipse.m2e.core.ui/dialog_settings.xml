@@ -2,6 +2,8 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="D:\AllCode\Microservices\UService"/>
+			<item value="D:\AllCode\Microservices"/>
 			<item value="D:\STSCode\UserService"/>
 		</list>
 		<list key="projectNameTemplate">
