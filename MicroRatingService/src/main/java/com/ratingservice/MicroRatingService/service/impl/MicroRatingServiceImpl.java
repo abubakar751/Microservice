@@ -1,9 +1,11 @@
 package com.ratingservice.MicroRatingService.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.ratingservice.MicroRatingService.entity.MicroRating;
 import com.ratingservice.MicroRatingService.repository.RatingRepository;
@@ -13,6 +15,8 @@ import com.ratingservice.MicroRatingService.service.MicroRatingService;
 public class MicroRatingServiceImpl implements MicroRatingService {
 	@Autowired
 private RatingRepository ratingRepository;
+	@Autowired
+	private RestTemplate restTemplate;
 	@Override
 	public MicroRating createRating(MicroRating microRating) {
 MicroRating save = ratingRepository.save(microRating);
@@ -26,9 +30,13 @@ MicroRating save = ratingRepository.save(microRating);
 	}
 
 	@Override
-	public List<MicroRating> getRatingByUserId(String ratingId) {
+	public List<MicroRating> getRatingByUserId(String userId) {
 		
-		return ratingRepository.findRatingByUserId(ratingId);
+		return ratingRepository.findRatingByUserId(userId);
+		  
+		  
+		 
+		 
 	}
 
 	@Override
