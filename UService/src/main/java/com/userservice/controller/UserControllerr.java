@@ -20,20 +20,23 @@ import com.userservice.services.UserServices;
 public class UserControllerr {
 	@Autowired
 	private UserServices userServices;
+
 	@PostMapping("/post")
-	public ResponseEntity<UserService> createUser(@RequestBody UserService service){
-		
-		 UserService saveUser = userServices.saveUser(service);
-		 return ResponseEntity.status(HttpStatus.CREATED).body(saveUser);
+	public ResponseEntity<UserService> createUser(@RequestBody UserService service) {
+
+		UserService saveUser = userServices.saveUser(service);
+		return ResponseEntity.status(HttpStatus.CREATED).body(saveUser);
 	}
+
 	@GetMapping("/user/{userId}")
-public ResponseEntity<UserService>   getuser(@PathVariable String userId) {
-	 com.userservice.entities.UserService user = userServices.getUser(userId);
-	 
-	 return ResponseEntity.ok(user);
-}
+	public ResponseEntity<UserService> getuser(@PathVariable String userId) {
+		com.userservice.entities.UserService user = userServices.getUser(userId);
+
+		return ResponseEntity.ok(user);
+	}
+
 	@GetMapping("/getAll")
-	public ResponseEntity<List<UserService>> getAll(){
+	public ResponseEntity<List<UserService>> getAll() {
 		List<UserService> allUser = userServices.getAllUser();
 		return ResponseEntity.ok(allUser);
 	}
