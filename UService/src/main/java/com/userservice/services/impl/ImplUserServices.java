@@ -41,13 +41,13 @@ public UserService getUser(String userId) {
             .orElseThrow(() -> new ResourceAccessException("Given Id not found on server"));
 
     // 2. Rating service call
-    String url = "http://localhost:1003/rating/userid/" + userId;
+    String url = "http://MICRORATINGSERVICE/rating/userid/" + userId;
     Rating[] ratings = restTemplate.getForObject(url, Rating[].class);
 
     // 3. Har rating ke liye hotel service call
     List<Rating> ratingList = Arrays.stream(ratings).map(rating -> {
         Hotel hotel = restTemplate.getForObject(
-                "http://localhost:1002/hotel/get/" + rating.getHotelId(),
+                "http://HOTELSERVICES/hotel/get/" + rating.getHotelId(),
                 Hotel.class
         );
         rating.setHotel(hotel);
