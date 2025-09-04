@@ -2,6 +2,8 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="D:\AllCode\Microservices\ConfigServer"/>
+			<item value="D:\AllCode\Microservices\Api_Gateway"/>
 			<item value="D:\AllCode\Microservices\ServiceRegistery"/>
 			<item value="D:\AllCode\Microservices\MicroRatingService"/>
 			<item value="D:\AllCode\Microservices\HotelServices"/>
